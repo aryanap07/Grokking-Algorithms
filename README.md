@@ -1,7 +1,5 @@
 # Grokking-Algorithms
 
-[![CI](https://github.com/aryanap07/Grokking-Algorithms/actions/workflows/ci.yml/badge.svg)](https://github.com/aryanap07/Grokking-Algorithms/actions/workflows/ci.yml)
-
 This repository contains hands-on implementations of exercises and examples from the book "Grokking Algorithms" by Aditya Bhargava. It's intended for learning, implementing, and applying the algorithms and data-structure concepts introduced in the book.
 
 **Purpose:** Learn the core ideas from the book by reading short examples, implementing them in code, and running small experiments across multiple languages (Python, Java, C++, etc.).
