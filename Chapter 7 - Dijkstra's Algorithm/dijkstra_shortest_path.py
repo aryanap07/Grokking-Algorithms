@@ -1,3 +1,11 @@
+"""
+Problem: Shortest Path in a Weighted Graph (Dijkstra's Algorithm)
+
+Time Complexity : O(V²)
+Space Complexity: O(V)
+
+Author: Aryan Patel
+"""
 graph = {
     "start": {"a": 6, "b": 2},
     "a": {"fin": 1},
@@ -18,44 +26,42 @@ def find_lowest_cost_node(costs, processed):
     return lowest_node
 
 
-costs = {
-    "a": 6,
-    "b": 2,
-    "fin": float("inf")
-}
+def dijkstra(graph, start, end):
+    costs = {node: float("inf") for node in graph}
+    parents = {node: None for node in graph}
 
-parents = {
-    "start": None,
-    "a": "start",
-    "b": "start",
-    "fin": None
-}
+    for neighbor, weight in graph[start].items():
+        costs[neighbor] = weight
+        parents[neighbor] = start
 
-processed = []
+    processed = set()
 
-node = find_lowest_cost_node(costs, processed)
-
-while node:
-    cost = costs[node]
-
-    for neighbor, weight in graph[node].items():
-        new_cost = cost + weight
-
-        if new_cost < costs[neighbor]:
-            costs[neighbor] = new_cost
-            parents[neighbor] = node
-
-    processed.append(node)
     node = find_lowest_cost_node(costs, processed)
 
-path = []
-current = "fin"
+    while node:
+        current_cost = costs[node]
 
-while current:
-    path.append(current)
-    current = parents[current]
+        for neighbor, weight in graph[node].items():
+            new_cost = current_cost + weight
 
-path.reverse()
+            if new_cost < costs[neighbor]:
+                costs[neighbor] = new_cost
+                parents[neighbor] = node
 
-print("Shortest Cost:", costs["fin"])
+        processed.add(node)
+        node = find_lowest_cost_node(costs, processed)
+
+    path = []
+    current = end
+
+    while current:
+        path.append(current)
+        current = parents[current]
+
+    return costs[end], path[::-1]
+
+
+cost, path = dijkstra(graph, "start", "fin")
+
+print("Shortest Cost:", cost)
 print("Shortest Path:", " -> ".join(path))
