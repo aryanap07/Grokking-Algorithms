@@ -6,10 +6,8 @@ import subprocess
 root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 examples = []
 for dirpath, dirnames, filenames in os.walk(root):
-    # skip this tests folder and hidden directories
     if os.path.basename(dirpath).startswith('.') or 'tests' in dirpath.split(os.sep):
         continue
-    # Only include files in chapter folders
     if 'Chapter' not in dirpath:
         continue
     for fn in filenames:
